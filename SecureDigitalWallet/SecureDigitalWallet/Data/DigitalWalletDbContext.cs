@@ -13,7 +13,7 @@ namespace SecureDigitalWallet.Data
         }
 
         public DbSet<Wallet> Wallets { get; set; } = null!;
-        public DbSet<FinancialTransaction> FinancialTransactions { get; set; } = null!;
+        public DbSet<WalletTransaction> FinancialTransactions { get; set; } = null!;
         public DbSet<CurrencyAccount> CurrencyAccounts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

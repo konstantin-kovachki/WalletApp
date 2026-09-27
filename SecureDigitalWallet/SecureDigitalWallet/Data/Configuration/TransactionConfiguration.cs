@@ -5,9 +5,9 @@ using SecureDigitalWallet.Models;
 
 namespace SecureDigitalWallet.Data.Configuration
 {
-    public class TransactionConfiguration : IEntityTypeConfiguration<FinancialTransaction>
+    public class TransactionConfiguration : IEntityTypeConfiguration<WalletTransaction>
     {
-        public void Configure(EntityTypeBuilder<FinancialTransaction> builder)
+        public void Configure(EntityTypeBuilder<WalletTransaction> builder)
         {
             builder.Property(t => t.Amount)
                 .HasPrecision(18, 2);
