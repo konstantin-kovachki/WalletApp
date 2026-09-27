@@ -10,10 +10,16 @@ namespace SecureDigitalWallet
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddAuthorization();
+
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string 'SqlServerDev' not found.");
+
             builder.Services.AddDbContext<DigitalWalletDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

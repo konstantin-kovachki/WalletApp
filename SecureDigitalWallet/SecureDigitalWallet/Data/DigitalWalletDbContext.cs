@@ -13,13 +13,14 @@ namespace SecureDigitalWallet.Data
         }
 
         public DbSet<Wallet> Wallets { get; set; } = null!;
-        public DbSet<Transaction> Transactions { get; set; } = null!;
+        public DbSet<FinancialTransaction> FinancialTransactions { get; set; } = null!;
         public DbSet<CurrencyAccount> CurrencyAccounts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeo(DigitalWalletDbContext).Assembly)
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DigitalWalletDbContext).Assembly);
         }
+    }
 }

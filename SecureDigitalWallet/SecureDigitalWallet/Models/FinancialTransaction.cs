@@ -6,7 +6,7 @@ using System.Transactions;
 namespace SecureDigitalWallet.Models
 {
     using static Common.EntityValidation;
-    public class Transaction
+    public class FinancialTransaction
     {
         [Key]
         public int Id { get; set; }
