@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Transactions;
-using SecureDigitalWallet.Models;
+using SecureDigitalWallet.Data.Models;
 
 namespace SecureDigitalWallet.Data.Configuration
 {

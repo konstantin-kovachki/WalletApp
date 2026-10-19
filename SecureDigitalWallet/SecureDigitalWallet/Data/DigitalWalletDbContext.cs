@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SecureDigitalWallet.Models;
+using SecureDigitalWallet.Data.Models;
 using System.Transactions;
 
 namespace SecureDigitalWallet.Data

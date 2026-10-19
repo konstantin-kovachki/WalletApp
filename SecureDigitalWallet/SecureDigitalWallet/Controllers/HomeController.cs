@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SecureDigitalWallet.Models;
+using SecureDigitalWallet.Data.Models;
+using SecureDigitalWallet.ViewModels;
 using System.Diagnostics;
 
 namespace SecureDigitalWallet.Controllers

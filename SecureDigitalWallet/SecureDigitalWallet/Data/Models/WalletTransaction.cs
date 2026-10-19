@@ -1,9 +1,9 @@
-﻿using SecureDigitalWallet.Models.Enums;
+﻿using SecureDigitalWallet.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Transactions;
 
-namespace SecureDigitalWallet.Models
+namespace SecureDigitalWallet.Data.Models
 {
     using static Common.EntityValidation;
     public class WalletTransaction

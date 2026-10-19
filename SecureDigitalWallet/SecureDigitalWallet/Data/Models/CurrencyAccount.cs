@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SecureDigitalWallet.Models
+namespace SecureDigitalWallet.Data.Models
 {
     using static Common.EntityValidation;
 

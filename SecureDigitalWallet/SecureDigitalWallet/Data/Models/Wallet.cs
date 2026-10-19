@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SecureDigitalWallet.Models
+namespace SecureDigitalWallet.Data.Models
 {
     using static Common.EntityValidation;
     public class Wallet

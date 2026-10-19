@@ -1,4 +1,4 @@
-namespace SecureDigitalWallet.Models
+namespace SecureDigitalWallet.ViewModels
 {
     public class ErrorViewModel
     {

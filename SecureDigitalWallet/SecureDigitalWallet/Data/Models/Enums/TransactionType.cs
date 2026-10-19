@@ -1,4 +1,4 @@
-﻿namespace SecureDigitalWallet.Models.Enums
+﻿namespace SecureDigitalWallet.Data.Models.Enums
 {
     public enum TransactionType
     {
