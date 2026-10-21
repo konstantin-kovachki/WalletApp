@@ -244,7 +244,7 @@ namespace SecureDigitalWallet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CurrencyAccounts");
+                    b.ToTable("CurrencyAccounts", (string)null);
                 });
 
             modelBuilder.Entity("SecureDigitalWallet.Models.FinancialTransaction", b =>
@@ -276,7 +276,7 @@ namespace SecureDigitalWallet.Data.Migrations
 
                     b.HasIndex("WalletId");
 
-                    b.ToTable("FinancialTransactions");
+                    b.ToTable("FinancialTransactions", (string)null);
                 });
 
             modelBuilder.Entity("SecureDigitalWallet.Models.Wallet", b =>
@@ -311,7 +311,7 @@ namespace SecureDigitalWallet.Data.Migrations
 
                     b.HasIndex("CurrencyAccountId");
 
-                    b.ToTable("Wallets");
+                    b.ToTable("Wallets", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

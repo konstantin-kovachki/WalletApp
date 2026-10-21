@@ -1,11 +1,10 @@
 ﻿using SecureDigitalWallet.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Transactions;
 
 namespace SecureDigitalWallet.Data.Models
 {
-    using static Common.EntityValidation;
+    using static SecureDigitalWallet.GCommon.ValidationConstants;
     public class WalletTransaction
     {
         [Key]

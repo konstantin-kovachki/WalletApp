@@ -2,7 +2,7 @@
 
 namespace SecureDigitalWallet.Data.Models
 {
-    using static Common.EntityValidation;
+    using static SecureDigitalWallet.GCommon.ValidationConstants;
 
     public class CurrencyAccount
     {

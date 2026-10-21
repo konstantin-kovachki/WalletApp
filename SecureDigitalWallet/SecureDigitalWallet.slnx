@@ -1,3 +1,14 @@
 <Solution>
-  <Project Path="SecureDigitalWallet/SecureDigitalWallet.csproj" />
+  <Folder Name="/Data/">
+    <Project Path="SecureDigitalWallet.Data/SecureDigitalWallet.Data.csproj" Id="e1b2f860-d74c-4c2b-aac2-eee550eb4b60" />
+    <Project Path="SecureDigitalWallet.DataModels/SecureDigitalWallet.DataModels.csproj" Id="f798c668-523b-4f43-b293-6e991233deba" />
+  </Folder>
+  <Folder Name="/Services/">
+    <Project Path="SecureDigitalWallet.Services.Core/SecureDigitalWallet.Services.Core.csproj" Id="fb172206-6726-48ac-a0ef-7bfd529adf79" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="SecureDigitalWallet.ViewModels/SecureDigitalWallet.ViewModels.csproj" Id="b63f26b6-a7e5-48a0-b4d0-677c89802637" />
+    <Project Path="SecureDigitalWallet/SecureDigitalWallet.Web.csproj" />
+  </Folder>
+  <Project Path="SecureDigitalWallet.GCommon/SecureDigitalWallet.GCommon.csproj" Id="d2879c6d-eb36-41ea-beda-e079a7d969ac" />
 </Solution>

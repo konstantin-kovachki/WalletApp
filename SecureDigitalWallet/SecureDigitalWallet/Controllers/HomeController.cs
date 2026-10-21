@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SecureDigitalWallet.Data.Models;
 using SecureDigitalWallet.ViewModels;
 using System.Diagnostics;
 
-namespace SecureDigitalWallet.Controllers
+namespace SecureDigitalWallet.Web.Controllers
 {
     public class HomeController : Controller
     {

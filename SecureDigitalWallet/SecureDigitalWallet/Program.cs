@@ -21,6 +21,7 @@ namespace SecureDigitalWallet
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DigitalWalletDbContext>();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -42,11 +43,13 @@ namespace SecureDigitalWallet
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.MapRazorPages();
 
             app.Run();

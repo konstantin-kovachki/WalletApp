@@ -1,6 +1,6 @@
-﻿namespace SecureDigitalWallet.Common
+﻿namespace SecureDigitalWallet.GCommon
 {
-    public static class EntityValidation
+    public static class ValidationConstants
     {
         //CurrencyAccount
         public const int CurrencyMaxLength = 3;

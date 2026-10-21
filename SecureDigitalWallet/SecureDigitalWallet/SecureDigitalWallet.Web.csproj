@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.31" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SecureDigitalWallet.Data\SecureDigitalWallet.Data.csproj" />
+    <ProjectReference Include="..\SecureDigitalWallet.Services.Core\SecureDigitalWallet.Services.Core.csproj" />
+    <ProjectReference Include="..\SecureDigitalWallet.ViewModels\SecureDigitalWallet.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>

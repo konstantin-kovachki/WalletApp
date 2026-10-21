@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SecureDigitalWallet.Data.Models;
-using System.Transactions;
 
 namespace SecureDigitalWallet.Data
 {
-    public class DigitalWalletDbContext : IdentityDbContext
+    public class DigitalWalletDbContext : IdentityDbContext<IdentityUser>
     {
         public DigitalWalletDbContext(DbContextOptions<DigitalWalletDbContext> options)
             : base(options)
@@ -13,7 +13,7 @@ namespace SecureDigitalWallet.Data
         }
 
         public DbSet<Wallet> Wallets { get; set; } = null!;
-        public DbSet<WalletTransaction> FinancialTransactions { get; set; } = null!;
+        public DbSet<WalletTransaction> WalletTransactions { get; set; } = null!;
         public DbSet<CurrencyAccount> CurrencyAccounts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
