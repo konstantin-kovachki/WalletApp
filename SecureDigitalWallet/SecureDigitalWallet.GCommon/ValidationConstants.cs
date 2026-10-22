@@ -7,6 +7,7 @@
         public const int CurrencyNameMaxLength = 50;
 
         //Wallet
+        public const int WalletNameMaxLength = 50;
         public const int WalletNumberMaxLength = 20;
         public const int WalletCurrencyMaxLength = 3;
 

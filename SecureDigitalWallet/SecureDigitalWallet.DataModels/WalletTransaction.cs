@@ -18,7 +18,7 @@ namespace SecureDigitalWallet.Data.Models
         public DateTime CreatedAt { get; set; }
 
         [Required]
-        public TransactionType MyProperty { get; set; }
+        public TransactionType TransactionType { get; set; }
 
         [ForeignKey(nameof(Wallet))]
         public int WalletId { get; set; }

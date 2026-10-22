@@ -3,6 +3,6 @@
     public class WalletEditDto
     {
         public int Id { get; set; }
-        public string WalletNumber { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
     }
 }

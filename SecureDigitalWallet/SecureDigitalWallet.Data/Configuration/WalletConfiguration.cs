@@ -10,6 +10,9 @@ namespace SecureDigitalWallet.Data.Configuration
         {
             builder.Property(w => w.Balance)
                 .HasPrecision(18, 2);
+
+            builder.HasIndex(w => w.WalletNumber)
+           .IsUnique();
         }
     }
 }
