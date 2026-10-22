@@ -224,7 +224,7 @@ namespace SecureDigitalWallet.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SecureDigitalWallet.Models.CurrencyAccount", b =>
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.CurrencyAccount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,42 +244,36 @@ namespace SecureDigitalWallet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CurrencyAccounts", (string)null);
+                    b.ToTable("CurrencyAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Currency = "EUR",
+                            Name = "Euro"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Currency = "USD",
+                            Name = "US Dollar"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Currency = "BGN",
+                            Name = "Bulgarian Lev"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Currency = "GBP",
+                            Name = "British Pound"
+                        });
                 });
 
-            modelBuilder.Entity("SecureDigitalWallet.Models.FinancialTransaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WalletId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WalletId");
-
-                    b.ToTable("FinancialTransactions", (string)null);
-                });
-
-            modelBuilder.Entity("SecureDigitalWallet.Models.Wallet", b =>
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.Wallet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -302,6 +296,11 @@ namespace SecureDigitalWallet.Data.Migrations
                     b.Property<int>("CurrencyAccountId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("WalletNumber")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -311,7 +310,42 @@ namespace SecureDigitalWallet.Data.Migrations
 
                     b.HasIndex("CurrencyAccountId");
 
-                    b.ToTable("Wallets", (string)null);
+                    b.HasIndex("WalletNumber")
+                        .IsUnique();
+
+                    b.ToTable("Wallets");
+                });
+
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.WalletTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WalletId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WalletId");
+
+                    b.ToTable("WalletTransactions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -365,20 +399,9 @@ namespace SecureDigitalWallet.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SecureDigitalWallet.Models.FinancialTransaction", b =>
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.Wallet", b =>
                 {
-                    b.HasOne("SecureDigitalWallet.Models.Wallet", "Wallet")
-                        .WithMany()
-                        .HasForeignKey("WalletId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Wallet");
-                });
-
-            modelBuilder.Entity("SecureDigitalWallet.Models.Wallet", b =>
-                {
-                    b.HasOne("SecureDigitalWallet.Models.CurrencyAccount", "CurrencyAccount")
+                    b.HasOne("SecureDigitalWallet.Data.Models.CurrencyAccount", "CurrencyAccount")
                         .WithMany("Wallets")
                         .HasForeignKey("CurrencyAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -387,9 +410,25 @@ namespace SecureDigitalWallet.Data.Migrations
                     b.Navigation("CurrencyAccount");
                 });
 
-            modelBuilder.Entity("SecureDigitalWallet.Models.CurrencyAccount", b =>
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.WalletTransaction", b =>
+                {
+                    b.HasOne("SecureDigitalWallet.Data.Models.Wallet", "Wallet")
+                        .WithMany("Transactions")
+                        .HasForeignKey("WalletId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Wallet");
+                });
+
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.CurrencyAccount", b =>
                 {
                     b.Navigation("Wallets");
+                });
+
+            modelBuilder.Entity("SecureDigitalWallet.Data.Models.Wallet", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
