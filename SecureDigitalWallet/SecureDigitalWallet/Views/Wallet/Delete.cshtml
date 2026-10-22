@@ -1,0 +1,18 @@
+﻿@model WalletDeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Wallet";
+}
+
+<h1>Delete Wallet</h1>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete the wallet <strong>@Model.Name</strong>
+    (@Model.WalletNumber, balance: @Model.Balance.ToString("N2") @Model.Currency)?
+    Its transactions will be deleted too.
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+</form>

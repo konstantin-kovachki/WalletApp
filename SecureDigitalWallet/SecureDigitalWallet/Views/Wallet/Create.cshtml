@@ -1,0 +1,46 @@
+﻿@model WalletCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Wallet";
+}
+
+<h1>Create Wallet</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Wallet Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="WalletNumber" class="form-label">Wallet Number</label>
+                <input asp-for="WalletNumber" class="form-control" />
+                <span asp-validation-for="WalletNumber" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CurrencyAccountId" class="form-label">Currency</label>
+                <select asp-for="CurrencyAccountId" class="form-select"
+                        asp-items="@(new SelectList(Model.CurrencyAccounts,
+                                                               nameof(CurrencyAccountViewModel.Id),
+                                                               nameof(CurrencyAccountViewModel.DisplayName)))">
+                </select>
+                <span asp-validation-for="CurrencyAccountId" class="text-danger"></span>
+            </div>
+
+            <p class="text-muted small">A new wallet starts with a balance of 0.</p>
+
+            <button type="submit" class="btn btn-primary">Create Wallet</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SecureDigitalWallet.Data;
+using SecureDigitalWallet.Services.Core;
+using SecureDigitalWallet.Services.Core.Contracts;
 
 namespace SecureDigitalWallet
 {
@@ -23,6 +25,8 @@ namespace SecureDigitalWallet
                 .AddEntityFrameworkStores<DigitalWalletDbContext>();
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IWalletService, WalletService>();
 
             var app = builder.Build();
 
