@@ -107,12 +107,12 @@ namespace SecureDigitalWallet.Services.Core
                  .Take(count)
                  .Select(w => new WalletDto
                  {
-                    Id = w.Id,
-                    Name = w.Name,
-                    WalletNumber = w.WalletNumber,
-                    Currency = w.Currency,
-                    Balance = w.Balance,
-                    CreatedAt = w.CreatedAt
+                     Id = w.Id,
+                     Name = w.Name,
+                     WalletNumber = w.WalletNumber,
+                     Currency = w.Currency,
+                     Balance = w.Balance,
+                     CreatedAt = w.CreatedAt
                  })
                  .ToListAsync();
         }

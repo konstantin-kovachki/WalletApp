@@ -20,14 +20,14 @@ namespace SecureDigitalWallet.Web.Controllers
 
             var model = wallets
                 .Select(w => new WalletIndexViewModel
-            {
-                Id = w.Id,
-                Name = w.Name,
-                WalletNumber = w.WalletNumber,
-                Currency = w.Currency,
-                Balance = w.Balance,
-                CreatedAt = w.CreatedAt
-            });
+                {
+                    Id = w.Id,
+                    Name = w.Name,
+                    WalletNumber = w.WalletNumber,
+                    Currency = w.Currency,
+                    Balance = w.Balance,
+                    CreatedAt = w.CreatedAt
+                });
 
             return View(model);
         }

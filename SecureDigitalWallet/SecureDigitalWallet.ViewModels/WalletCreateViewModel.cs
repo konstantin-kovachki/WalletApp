@@ -6,7 +6,7 @@ namespace SecureDigitalWallet.ViewModels
     public class WalletCreateViewModel
     {
         [Required(ErrorMessage = "Please enter a wallet name.")]
-        [MaxLength(WalletNameMaxLength, 
+        [MaxLength(WalletNameMaxLength,
             ErrorMessage = "The wallet name can't be longer than {1} characters.")]
         public string Name { get; set; } = string.Empty;
 

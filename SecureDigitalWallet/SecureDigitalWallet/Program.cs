@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using SecureDigitalWallet.Data;
 using SecureDigitalWallet.Services.Core;
 using SecureDigitalWallet.Services.Core.Contracts;
+using SecureDigitalWallet.Data;
 
 namespace SecureDigitalWallet
 {
@@ -16,13 +15,14 @@ namespace SecureDigitalWallet
 
             var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string 'SqlServerDev' not found.");
 
-            builder.Services.AddDbContext<DigitalWalletDbContext>(options => {
-                    options.UseSqlServer(connectionString);
-                 });
+            builder.Services.AddDbContext<DigitalWalletDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
 
