@@ -79,6 +79,9 @@ namespace SecureDigitalWallet.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                string name = model.Name.Trim();
+                string walletNumber = model.WalletNumber.Trim();
+
                 if (await walletService.WalletNumberExistsAsync(model.WalletNumber))
                 {
                     ModelState.AddModelError(nameof(model.WalletNumber), "A wallet with this number already exists.");
@@ -137,7 +140,7 @@ namespace SecureDigitalWallet.Web.Controllers
             var dto = new WalletEditDto
             {
                 Id = model.Id,
-                Name = model.Name
+                Name = model.Name.Trim()
             };
 
             bool edited = await walletService.EditWalletAsync(dto);
