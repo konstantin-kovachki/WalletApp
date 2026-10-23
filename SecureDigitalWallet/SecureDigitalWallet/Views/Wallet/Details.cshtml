@@ -40,7 +40,7 @@ else
             <tr><th>Date</th><th>Type</th><th>Amount</th><th>Description</th></tr>
         </thead>
         <tbody>
-            @foreach (var t in Model.Transactions)
+            @foreach (TransactionViewModel t in Model.Transactions)
             {
                 <tr>
                     <td>@t.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>

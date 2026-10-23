@@ -1,4 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SecureDigitalWallet.Services.Core;
+using SecureDigitalWallet.Services.Core.Contracts;
 using SecureDigitalWallet.ViewModels;
 using System.Diagnostics;
 
@@ -6,16 +8,29 @@ namespace SecureDigitalWallet.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IWalletService walletService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IWalletService walletService)
         {
-            _logger = logger;
+            this.walletService = walletService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var wallets = await walletService.GetLatestWalletsAsync(3);
+
+            var model = wallets
+                .Select(w => new WalletIndexViewModel
+            {
+                Id = w.Id,
+                Name = w.Name,
+                WalletNumber = w.WalletNumber,
+                Currency = w.Currency,
+                Balance = w.Balance,
+                CreatedAt = w.CreatedAt
+            });
+
+            return View(model);
         }
 
         public IActionResult Privacy()

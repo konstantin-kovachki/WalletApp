@@ -1,9 +1,41 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<WalletIndexViewModel>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a class="btn btn-primary" asp-controller="Wallet" asp-action="Index">View Wallets</a>
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <h1 class="display-5 fw-bold">Secure Digital Wallet</h1>
+    <p class="lead">
+        Create and manage digital wallets in different currencies.
+        This is Version 1, built to demonstrate ASP.NET Core MVC fundamentals.
+        Deposits, transfers and currency conversion will be added in later versions.
+    </p>
+    <a class="btn btn-primary btn-lg" asp-controller="Wallet" asp-action="Index">View wallets</a>
+    <a class="btn btn-outline-primary btn-lg" asp-controller="Wallet" asp-action="Create">Create a wallet</a>
 </div>
+
+<h2 class="h4 mb-3">Latest wallets</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You don't have any wallets yet.
+        <a asp-controller="Wallet" asp-action="Create">Create your first one.</a>
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        @foreach (var wallet in Model)
+        {
+            <div class="col">
+                <partial name="_WalletSummary" model="wallet" />
+            </div>
+        }
+    </div>
+}

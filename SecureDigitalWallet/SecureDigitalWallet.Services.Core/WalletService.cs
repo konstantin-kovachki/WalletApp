@@ -100,6 +100,23 @@ namespace SecureDigitalWallet.Services.Core
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<WalletDto>> GetLatestWalletsAsync(int count)
+        {
+            return await dbContext.Wallets
+                 .OrderByDescending(w => w.CreatedAt)
+                 .Take(count)
+                 .Select(w => new WalletDto
+                 {
+                    Id = w.Id,
+                    Name = w.Name,
+                    WalletNumber = w.WalletNumber,
+                    Currency = w.Currency,
+                    Balance = w.Balance,
+                    CreatedAt = w.CreatedAt
+                 })
+                 .ToListAsync();
+        }
+
         public async Task<WalletDto?> GetWalletByIdAsync(int id)
         {
             Wallet? wallet = await dbContext.Wallets.FindAsync(id);

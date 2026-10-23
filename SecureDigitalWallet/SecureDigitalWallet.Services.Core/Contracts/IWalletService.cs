@@ -7,6 +7,8 @@ namespace SecureDigitalWallet.Services.Core.Contracts
     {
         Task<IEnumerable<WalletDto>> GetAllWalletsAsync();
 
+        Task<IEnumerable<WalletDto>> GetLatestWalletsAsync(int count);
+
         Task<WalletDetailsDto?> GetWalletDetailsAsync(int id);
 
         Task<WalletDto?> GetWalletByIdAsync(int id);

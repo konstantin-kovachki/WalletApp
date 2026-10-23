@@ -1,0 +1,21 @@
+﻿@model WalletIndexViewModel
+
+<div class="card h-100 wallet-card shadow-sm">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <h5 class="card-title mb-1">@Model.Name</h5>
+            <span class="badge bg-secondary">@Model.Currency</span>
+        </div>
+
+        <p class="text-muted small mb-3">@Model.WalletNumber</p>
+
+        <p class="fs-4 mb-0 @(Model.Balance > 0 ? "text-success" : "text-muted")">
+            @Model.Balance.ToString("N2") @Model.Currency
+        </p>
+    </div>
+
+    <div class="card-footer bg-transparent border-0">
+        <a class="btn btn-sm btn-outline-primary"
+           asp-controller="Wallet" asp-action="Details" asp-route-id="@Model.Id">Details</a>
+    </div>
+</div>

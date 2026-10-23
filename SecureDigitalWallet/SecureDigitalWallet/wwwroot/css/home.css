@@ -1,0 +1,9 @@
+﻿.wallet-card 
+{
+    transition: transform 0.15s ease;
+}
+
+.wallet-card:hover 
+{
+    transform: translateY(-3px);
+}
