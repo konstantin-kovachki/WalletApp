@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SecureDigitalWallet.Data.Models;
 
@@ -13,6 +14,11 @@ namespace SecureDigitalWallet.Data.Configuration
 
             builder.HasIndex(w => w.WalletNumber)
            .IsUnique();
+
+            builder.HasOne<IdentityUser>()
+                .WithMany()
+                .HasForeignKey(w => w.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

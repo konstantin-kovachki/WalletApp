@@ -28,6 +28,7 @@ namespace SecureDigitalWallet.Services.Core
 
             var wallet = new Wallet
             {
+                UserId = dto.UserId,
                 Name = dto.Name,
                 WalletNumber = dto.WalletNumber,
                 CurrencyAccountId = account.Id,
@@ -42,9 +43,10 @@ namespace SecureDigitalWallet.Services.Core
             return true;
         }
 
-        public async Task<bool> DeleteWalletAsync(int id)
+        public async Task<bool> DeleteWalletAsync(int id, string userId)
         {
-            Wallet? wallet = await dbContext.Wallets.FindAsync(id);
+            Wallet? wallet = await dbContext.Wallets
+                .FirstOrDefaultAsync(w => w.Id == id && w.UserId == userId);
 
             if (wallet == null)
             {
@@ -59,7 +61,8 @@ namespace SecureDigitalWallet.Services.Core
 
         public async Task<bool> EditWalletAsync(WalletEditDto dto)
         {
-            Wallet? wallet = await dbContext.Wallets.FindAsync(dto.Id);
+            Wallet? wallet = await dbContext.Wallets
+                .FirstOrDefaultAsync(w => w.Id == dto.Id && w.UserId == dto.UserId);
 
             if (wallet == null)
             {
@@ -84,9 +87,10 @@ namespace SecureDigitalWallet.Services.Core
             .ToListAsync();
         }
 
-        public async Task<IEnumerable<WalletDto>> GetAllWalletsAsync()
+        public async Task<IEnumerable<WalletDto>> GetAllWalletsAsync(string userId)
         {
             return await dbContext.Wallets
+                .Where(w => w.UserId == userId)
                 .OrderByDescending(w => w.CreatedAt)
                 .Select(w => new WalletDto
                 {
@@ -100,9 +104,10 @@ namespace SecureDigitalWallet.Services.Core
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<WalletDto>> GetLatestWalletsAsync(int count)
+        public async Task<IEnumerable<WalletDto>> GetLatestWalletsAsync(int count, string userId)
         {
             return await dbContext.Wallets
+                 .Where(w => w.UserId == userId)
                  .OrderByDescending(w => w.CreatedAt)
                  .Take(count)
                  .Select(w => new WalletDto
@@ -117,9 +122,10 @@ namespace SecureDigitalWallet.Services.Core
                  .ToListAsync();
         }
 
-        public async Task<WalletDto?> GetWalletByIdAsync(int id)
+        public async Task<WalletDto?> GetWalletByIdAsync(int id, string userId)
         {
-            Wallet? wallet = await dbContext.Wallets.FindAsync(id);
+            Wallet? wallet = await dbContext.Wallets
+                .FirstOrDefaultAsync(w => w.Id == id && w.UserId == userId);
 
             if (wallet == null)
             {
@@ -137,11 +143,11 @@ namespace SecureDigitalWallet.Services.Core
             };
         }
 
-        public async Task<WalletDetailsDto?> GetWalletDetailsAsync(int id)
+        public async Task<WalletDetailsDto?> GetWalletDetailsAsync(int id, string userId)
         {
             Wallet? wallet = await dbContext.Wallets
                 .Include(w => w.Transactions)
-                .FirstOrDefaultAsync(w => w.Id == id);
+                .FirstOrDefaultAsync(w => w.Id == id && w.UserId == userId);
 
             if (wallet == null)
             {

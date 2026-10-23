@@ -5,13 +5,13 @@ namespace SecureDigitalWallet.Services.Core.Contracts
 {
     public interface IWalletService
     {
-        Task<IEnumerable<WalletDto>> GetAllWalletsAsync();
+        Task<IEnumerable<WalletDto>> GetAllWalletsAsync(string userId);
 
-        Task<IEnumerable<WalletDto>> GetLatestWalletsAsync(int count);
+        Task<IEnumerable<WalletDto>> GetLatestWalletsAsync(int count, string userId);
 
-        Task<WalletDetailsDto?> GetWalletDetailsAsync(int id);
+        Task<WalletDetailsDto?> GetWalletDetailsAsync(int id, string userId);
 
-        Task<WalletDto?> GetWalletByIdAsync(int id);
+        Task<WalletDto?> GetWalletByIdAsync(int id, string userId);
 
         Task<IEnumerable<CurrencyAccountDto>> GetAllCurrencyAccountsAsync();
 
@@ -21,6 +21,6 @@ namespace SecureDigitalWallet.Services.Core.Contracts
 
         Task<bool> EditWalletAsync(WalletEditDto dto);
 
-        Task<bool> DeleteWalletAsync(int id);
+        Task<bool> DeleteWalletAsync(int id, string userId);
     }
 }

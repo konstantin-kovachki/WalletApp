@@ -2,6 +2,7 @@
 using SecureDigitalWallet.Services.Core.Contracts;
 using SecureDigitalWallet.ViewModels;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace SecureDigitalWallet.Web.Controllers
 {
@@ -16,7 +17,15 @@ namespace SecureDigitalWallet.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var wallets = await walletService.GetLatestWalletsAsync(3);
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+            {
+                return View(new List<WalletIndexViewModel>());
+            }
+
+            var wallets = await walletService
+                .GetLatestWalletsAsync(3, userId);
 
             var model = wallets
                 .Select(w => new WalletIndexViewModel

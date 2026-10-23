@@ -301,6 +301,10 @@ namespace SecureDigitalWallet.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("WalletNumber")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -309,6 +313,8 @@ namespace SecureDigitalWallet.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyAccountId");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("WalletNumber")
                         .IsUnique();
@@ -405,6 +411,12 @@ namespace SecureDigitalWallet.Data.Migrations
                         .WithMany("Wallets")
                         .HasForeignKey("CurrencyAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("CurrencyAccount");

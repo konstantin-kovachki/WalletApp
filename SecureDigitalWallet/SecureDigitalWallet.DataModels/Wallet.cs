@@ -10,6 +10,9 @@ namespace SecureDigitalWallet.Data.Models
         public int Id { get; set; }
 
         [Required]
+        public string UserId { get; set; } = string.Empty;
+
+        [Required]
         [MaxLength(WalletNameMaxLength)]
         public string Name { get; set; } = string.Empty;
 

@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SecureDigitalWallet.Services.Core.Contracts;
 using SecureDigitalWallet.Services.Core.DTOs.Requests;
 using SecureDigitalWallet.ViewModels;
+using System.Security.Claims;
 
 namespace SecureDigitalWallet.Web.Controllers
 {
+    [Authorize]
     public class WalletController : Controller
     {
         private readonly IWalletService walletService;
@@ -16,7 +19,8 @@ namespace SecureDigitalWallet.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var wallets = await walletService.GetAllWalletsAsync();
+            var wallets = await walletService
+                .GetAllWalletsAsync(GetUserId());
 
             var model = wallets
                 .Select(w => new WalletIndexViewModel
@@ -34,7 +38,8 @@ namespace SecureDigitalWallet.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var wallet = await walletService.GetWalletDetailsAsync(id);
+            var wallet = await walletService
+                .GetWalletDetailsAsync(id, GetUserId());
 
             if (wallet == null)
             {
@@ -91,6 +96,7 @@ namespace SecureDigitalWallet.Web.Controllers
 
                     var dto = new WalletCreateDto
                     {
+                        UserId = GetUserId(),
                         Name = model.Name,
                         WalletNumber = model.WalletNumber,
                         CurrencyAccountId = model.CurrencyAccountId
@@ -113,7 +119,7 @@ namespace SecureDigitalWallet.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var wallet = await walletService.GetWalletByIdAsync(id);
+            var wallet = await walletService.GetWalletByIdAsync(id, GetUserId());
 
             if (wallet == null)
             {
@@ -140,6 +146,7 @@ namespace SecureDigitalWallet.Web.Controllers
             var dto = new WalletEditDto
             {
                 Id = model.Id,
+                UserId = GetUserId(),
                 Name = model.Name.Trim()
             };
 
@@ -156,7 +163,7 @@ namespace SecureDigitalWallet.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var wallet = await walletService.GetWalletByIdAsync(id);
+            var wallet = await walletService.GetWalletByIdAsync(id, GetUserId());
 
             if (wallet == null)
             {
@@ -178,7 +185,7 @@ namespace SecureDigitalWallet.Web.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await walletService.DeleteWalletAsync(id);
+            await walletService.DeleteWalletAsync(id, GetUserId());
             return RedirectToAction(nameof(Index));
         }
 
@@ -192,6 +199,11 @@ namespace SecureDigitalWallet.Web.Controllers
                 Currency = c.Currency,
                 Name = c.Name
             });
+        }
+
+        private string GetUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier)!;
         }
     }
 }

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home";
+    bool isLoggedIn = User.Identity?.IsAuthenticated == true;
 }
 
 @section Styles {
@@ -10,32 +11,43 @@
 
 <div class="p-5 mb-4 bg-light rounded-3">
     <h1 class="display-5 fw-bold">Secure Digital Wallet</h1>
-    <p class="lead">
-        Create and manage digital wallets in different currencies.
-        This is Version 1, built to demonstrate ASP.NET Core MVC fundamentals.
-        Deposits, transfers and currency conversion will be added in later versions.
-    </p>
-    <a class="btn btn-primary btn-lg" asp-controller="Wallet" asp-action="Index">View wallets</a>
-    <a class="btn btn-outline-primary btn-lg" asp-controller="Wallet" asp-action="Create">Create a wallet</a>
+
+    @if (isLoggedIn)
+    {
+        <a class="btn btn-primary btn-lg" asp-controller="Wallet" asp-action="Index">My wallets</a>
+        <a class="btn btn-outline-primary btn-lg" asp-controller="Wallet" asp-action="Create">Create a wallet</a>
+    }
+    else
+    {
+        <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="btn btn-outline-primary btn-lg" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+    }
 </div>
 
-<h2 class="h4 mb-3">Latest wallets</h2>
-
-@if (!Model.Any())
+@if (!isLoggedIn)
 {
-    <div class="alert alert-info">
-        You don't have any wallets yet.
-        <a asp-controller="Wallet" asp-action="Create">Create your first one.</a>
-    </div>
+    <div class="alert alert-info">Log in or register to create and manage your wallets.</div>
 }
 else
 {
-    <div class="row row-cols-1 row-cols-md-3 g-3">
-        @foreach (var wallet in Model)
-        {
-            <div class="col">
-                <partial name="_WalletSummary" model="wallet" />
-            </div>
-        }
-    </div>
+    <h2 class="h4 mb-3">Your latest wallets</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You don't have any wallets yet.
+            <a asp-controller="Wallet" asp-action="Create">Create your first one.</a>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            @foreach (var wallet in Model)
+            {
+                <div class="col">
+                    <partial name="_WalletSummary" model="wallet" />
+                </div>
+            }
+        </div>
+    }
 }
