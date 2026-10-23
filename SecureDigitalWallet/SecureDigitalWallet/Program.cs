@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using SecureDigitalWallet.Data;
 using SecureDigitalWallet.Services.Core;
 using SecureDigitalWallet.Services.Core.Contracts;
@@ -13,16 +14,19 @@ namespace SecureDigitalWallet
             var builder = WebApplication.CreateBuilder(args);
 
 
-            // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("SqlServerDev") ?? throw new InvalidOperationException("Connection string 'SqlServerDev' not found.");
 
-            builder.Services.AddDbContext<DigitalWalletDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<DigitalWalletDbContext>(options => {
+                    options.UseSqlServer(connectionString);
+                 });
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<DigitalWalletDbContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+
+            }).AddEntityFrameworkStores<DigitalWalletDbContext>();
 
             builder.Services.AddControllersWithViews();
 
@@ -30,15 +34,15 @@ namespace SecureDigitalWallet
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
