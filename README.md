@@ -70,7 +70,6 @@ Open **Tools → NuGet Package Manager → Package Manager Console**. At the top
 Update-Database
 ```
 
-This creates the database and fills in the currency list.
 
 **5. Start the app**
 
@@ -84,9 +83,6 @@ Press **F5**.
 
 ## Screenshots
 
-![Home page](docs/screenshots/home.png)
-![Wallets page](docs/screenshots/wallets.png)
+![Home page](assets/Home.png)
+![Wallets page](assets/Wallets.png)
 
-## Future plans
-
-Deposits and withdrawals, transfers between wallets, transaction history and currency conversion.
