@@ -60,9 +60,9 @@ Open `SecureDigitalWallet.Web/appsettings.json` and find the line with `DefaultC
 "DefaultConnection": "Server=.;Database=SecureDigitalWalletDb;Trusted_Connection=True;Encrypt=False"
 ```
 
-- If you use a normal local SQL Server, **change nothing**.
-- If your server has another name, replace the `.` after `Server=` with it. For example, for SQL Server Express:
-  `"Server=.\\SQLEXPRESS;Database=SecureDigitalWalletDb;Trusted_Connection=True;Encrypt=False"`
+- Replace the default Server after `Server=` with your server name.
+- For example:
+  `"Server=DESKTOP-ABC123\\SQLEXPRESS;Database=SecureDigitalWalletDb;Trusted_Connection=True;Encrypt=False"`
 
 
 **3. Choose the startup project**
