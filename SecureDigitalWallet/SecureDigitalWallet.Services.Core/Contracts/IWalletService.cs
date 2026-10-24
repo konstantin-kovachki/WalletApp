@@ -15,8 +15,6 @@ namespace SecureDigitalWallet.Services.Core.Contracts
 
         Task<IEnumerable<CurrencyAccountDto>> GetAllCurrencyAccountsAsync();
 
-        Task<bool> WalletNumberExistsAsync(string walletNumber);
-
         Task<bool> CreateWalletAsync(WalletCreateDto dto);
 
         Task<bool> EditWalletAsync(WalletEditDto dto);

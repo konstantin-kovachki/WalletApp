@@ -30,7 +30,7 @@ namespace SecureDigitalWallet.Services.Core
             {
                 UserId = dto.UserId,
                 Name = dto.Name,
-                WalletNumber = dto.WalletNumber,
+                WalletNumber = GenerateWalletNumber(),
                 CurrencyAccountId = account.Id,
                 Currency = account.Currency,
                 Balance = 0m,
@@ -174,11 +174,9 @@ namespace SecureDigitalWallet.Services.Core
                .ToList()
             };
         }
-
-        public async Task<bool> WalletNumberExistsAsync(string walletNumber)
+        private static string GenerateWalletNumber()
         {
-            return await dbContext.Wallets
-                .AnyAsync(w => w.WalletNumber == walletNumber);
+            return "WLTN" + Random.Shared.Next().ToString("D10");
         }
     }
 }

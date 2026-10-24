@@ -10,10 +10,6 @@ namespace SecureDigitalWallet.ViewModels
             ErrorMessage = "The wallet name can't be longer than {1} characters.")]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
-        [MaxLength(WalletNumberMaxLength)]
-        public string WalletNumber { get; set; } = string.Empty;
-
         public int CurrencyAccountId { get; set; }
 
         public IEnumerable<CurrencyAccountViewModel> CurrencyAccounts { get; set; }

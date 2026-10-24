@@ -84,21 +84,10 @@ namespace SecureDigitalWallet.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string name = model.Name.Trim();
-                string walletNumber = model.WalletNumber.Trim();
-
-                if (await walletService.WalletNumberExistsAsync(model.WalletNumber))
-                {
-                    ModelState.AddModelError(nameof(model.WalletNumber), "A wallet with this number already exists.");
-                }
-                else
-                {
-
                     var dto = new WalletCreateDto
                     {
                         UserId = GetUserId(),
                         Name = model.Name,
-                        WalletNumber = model.WalletNumber,
                         CurrencyAccountId = model.CurrencyAccountId
                     };
 
@@ -109,8 +98,8 @@ namespace SecureDigitalWallet.Web.Controllers
                         return RedirectToAction(nameof(Index));
                     }
 
-                    ModelState.AddModelError(nameof(model.CurrencyAccountId), "Please select a valid currency.");
-                }
+                    ModelState.AddModelError(nameof(model.CurrencyAccountId), 
+                        "Please select a valid currency.");
             }
             model.CurrencyAccounts = await GetCurrencyOptionsAsync();
             return View(model);
