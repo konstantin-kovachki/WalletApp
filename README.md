@@ -31,7 +31,14 @@ The solution has six projects:
 | `SecureDigitalWallet.ViewModels` | The models used by forms and pages |
 | `SecureDigitalWallet.GCommon` | Shared constants |
 
-A request goes like this: **Browser → Controller → Service → Database**.
+Request flow:
+
+```text
+Browser → Controller → IWalletService → WalletService → DbContext → SQL Server
+```
+
+The controller validates the ViewModel, maps it to a request DTO and calls the service. The service returns response DTOs, which the controller maps to ViewModels for the view. The current user's id is read from the login cookie in the controller and passed to the service, which only returns or changes that user's wallets.
+
 
 ## Database
 
