@@ -67,7 +67,7 @@ Open `SecureDigitalWallet.Web/appsettings.json` and find the line with `DefaultC
 
 **3. Choose the startup project**
 
-In Solution Explorer, right-click `SecureDigitalWallet.Web` and choose **Set as Startup Project**. Its name becomes bold.
+In Solution Explorer, right-click `SecureDigitalWallet.Web` and choose **Set as Startup Project**.
 
 **4. Create the database**
 
