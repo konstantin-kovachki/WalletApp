@@ -1,4 +1,4 @@
-# Secure Digital Wallet
+# Digital Wallet
 
 A simple website for managing digital wallets, built with ASP.NET Core MVC.
 
