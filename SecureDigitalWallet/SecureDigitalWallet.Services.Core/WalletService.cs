@@ -146,7 +146,6 @@ namespace SecureDigitalWallet.Services.Core
         public async Task<WalletDetailsDto?> GetWalletDetailsAsync(int id, string userId)
         {
             Wallet? wallet = await dbContext.Wallets
-                .Include(w => w.Transactions)
                 .FirstOrDefaultAsync(w => w.Id == id && w.UserId == userId);
 
             if (wallet == null)
@@ -161,17 +160,7 @@ namespace SecureDigitalWallet.Services.Core
                 WalletNumber = wallet.WalletNumber,
                 Currency = wallet.Currency,
                 Balance = wallet.Balance,
-                CreatedAt = wallet.CreatedAt,
-                Transactions = wallet.Transactions
-               .OrderByDescending(t => t.CreatedAt)
-               .Select(t => new TransactionDto
-               {
-                   CreatedAt = t.CreatedAt,
-                   Type = t.TransactionType.ToString(),
-                   Amount = t.Amount,
-                   Description = t.Description
-               })
-               .ToList()
+                CreatedAt = wallet.CreatedAt
             };
         }
         private static string GenerateWalletNumber()

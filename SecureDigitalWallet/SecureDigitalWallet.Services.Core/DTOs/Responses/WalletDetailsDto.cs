@@ -11,7 +11,5 @@
         public decimal Balance { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public List<TransactionDto> Transactions { get; set; }
-            = new List<TransactionDto>();
     }
 }

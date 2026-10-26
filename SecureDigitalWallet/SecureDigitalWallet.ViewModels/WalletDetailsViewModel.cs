@@ -8,7 +8,5 @@
         public string Currency { get; set; } = string.Empty;
         public decimal Balance { get; set; }
         public DateTime CreatedAt { get; set; }
-        public List<TransactionViewModel> Transactions { get; set; }
-            = new List<TransactionViewModel>();
     }
 }

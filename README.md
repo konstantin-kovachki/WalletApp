@@ -1,6 +1,6 @@
-# Secure Digital Wallet
+# Digital Wallet
 
-A simple website for managing digital wallets, built with ASP.NET Core MVC (Version 1).
+A simple website for managing digital wallets, built with ASP.NET Core MVC.
 
 ## What it does
 
@@ -10,9 +10,6 @@ A simple website for managing digital wallets, built with ASP.NET Core MVC (Vers
 - A wallet number is created automatically
 - Each user sees only their own wallets
 
-## Not included yet
-
-Deposits, withdrawals, transfers between wallets, transaction history and currency conversion will be in Version 2. A new wallet always starts with a balance of 0.
 
 ## Technologies
 
@@ -42,7 +39,7 @@ The controller validates the ViewModel, maps it to a request DTO and calls the s
 
 ## Database
 
-Three tables: **Wallet**, **WalletTransaction** (prepared for later versions) and **CurrencyAccount** (the list of currencies). One currency has many wallets, and one wallet has many transactions.
+Two tables: **Wallet**, **CurrencyAccount** (the list of currencies). One currency has many wallets, and each wallet belongs to exactly one currency.
 
 ## How to run it
 

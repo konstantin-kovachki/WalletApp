@@ -53,16 +53,7 @@ namespace SecureDigitalWallet.Web.Controllers
                 WalletNumber = wallet.WalletNumber,
                 Currency = wallet.Currency,
                 Balance = wallet.Balance,
-                CreatedAt = wallet.CreatedAt,
-                Transactions = wallet.Transactions
-                    .Select(t => new TransactionViewModel
-                    {
-                        CreatedAt = t.CreatedAt,
-                        Type = t.Type,
-                        Amount = t.Amount,
-                        Description = t.Description
-                    })
-                    .ToList()
+                CreatedAt = wallet.CreatedAt
             };
 
             return View(model);

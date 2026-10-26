@@ -11,7 +11,5 @@
         public const int WalletNumberMaxLength = 20;
         public const int WalletCurrencyMaxLength = 3;
 
-        //Transaction
-        public const int TransactionDescriptionMaxLength = 200;
     }
 }

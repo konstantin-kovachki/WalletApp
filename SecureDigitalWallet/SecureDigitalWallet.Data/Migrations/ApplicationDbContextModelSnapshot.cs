@@ -322,38 +322,6 @@ namespace SecureDigitalWallet.Data.Migrations
                     b.ToTable("Wallets");
                 });
 
-            modelBuilder.Entity("SecureDigitalWallet.Data.Models.WalletTransaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("TransactionType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WalletId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WalletId");
-
-                    b.ToTable("WalletTransactions");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -422,25 +390,9 @@ namespace SecureDigitalWallet.Data.Migrations
                     b.Navigation("CurrencyAccount");
                 });
 
-            modelBuilder.Entity("SecureDigitalWallet.Data.Models.WalletTransaction", b =>
-                {
-                    b.HasOne("SecureDigitalWallet.Data.Models.Wallet", "Wallet")
-                        .WithMany("Transactions")
-                        .HasForeignKey("WalletId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Wallet");
-                });
-
             modelBuilder.Entity("SecureDigitalWallet.Data.Models.CurrencyAccount", b =>
                 {
                     b.Navigation("Wallets");
-                });
-
-            modelBuilder.Entity("SecureDigitalWallet.Data.Models.Wallet", b =>
-                {
-                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

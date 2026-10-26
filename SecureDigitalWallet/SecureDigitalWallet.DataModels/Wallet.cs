@@ -33,7 +33,5 @@ namespace SecureDigitalWallet.Data.Models
 
         public CurrencyAccount? CurrencyAccount { get; set; }
 
-        public List<WalletTransaction> Transactions { get; set; }
-            = new List<WalletTransaction>();
     }
 }
