@@ -1,6 +1,6 @@
 # Secure Digital Wallet
 
-A simple website for managing digital wallets, built with ASP.NET Core MVC (Version 1).
+A simple website for managing digital wallets, built with ASP.NET Core MVC.
 
 ## What it does
 
@@ -9,10 +9,6 @@ A simple website for managing digital wallets, built with ASP.NET Core MVC (Vers
 - Choose a currency (EUR, USD, BGN or GBP)
 - A wallet number is created automatically
 - Each user sees only their own wallets
-
-## Not included yet
-
-Deposits, withdrawals, transfers between wallets, transaction history and currency conversion will be in Version 2. A new wallet always starts with a balance of 0.
 
 ## Technologies
 
